@@ -17,7 +17,7 @@ def load_dataset():
     with open(fname, newline='') as datafile:
         reader = csv.reader(datafile, delimiter=',')
         for r in reader:
-            transactions += [r[0].split(',')]
+            transactions += [r]
     num_transaction = len(transactions)
 
 
@@ -121,7 +121,6 @@ def output_result():
     
     # sort by decreasing confidence
     rule = {k: v for k, v in reversed(sorted(rule.items(), key=lambda x: x[1][0]))}
-    # print(rule)
     for k, v in rule.items():
         f.write(("[{}] => [{}] (Conf: {:,.1%}, Supp: {:,.0%})\n".format(','.join(k[0]), ','.join(k[1]), v[0], v[1])))
 

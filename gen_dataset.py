@@ -1,4 +1,5 @@
 import pandas as pd
+import csv
 
 raw_df = pd.read_csv("Good_Food_Purchasing_Data.csv")
 
@@ -12,4 +13,7 @@ for b in raw_df['transactions'].unique():
         transactions_ls += [items]
 
 out_df = pd.DataFrame(transactions_ls).dropna()
-out_df.to_csv('INTEGRATED-DATASET.csv', index=False, header=False)
+f = open('INTEGRATED-DATASET.csv', "w")
+for v in out_df.values:
+    f.write("{}\n".format(v[0]))
+f.close()
