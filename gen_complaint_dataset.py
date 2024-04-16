@@ -10,9 +10,7 @@ def generate_association_rules(raw_df):
 
     transactions_ls = []
     for b in raw_df['transactions'].unique():
-        # print('TYPE: ', raw_df[raw_df['transactions'] == b]['CONTRIBUTING FACTOR VEHICLE 1'])
         items = ','.join(list(raw_df[raw_df['transactions'] == b]['OFNS_DESC'].dropna().str.strip().unique()))
-        # items+=','.join(list(raw_df[raw_df['transactions'] == b]['CONTRIBUTING FACTOR VEHICLE 1'].dropna().str.strip().unique()))
         if len(items) > 0:
             transactions_ls += [items]
 
