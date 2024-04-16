@@ -11,15 +11,15 @@ def generate_association_rules(raw_df):
     # raw_df['transactions'] = raw_df['Complaint Year Number'].astype(str) +  ',' + raw_df['Month Number'].astype(str) + ',' + raw_df['Patrol Borough Name'].astype(str) + ',' 
     # + raw_df['PD Code Description'].astype(str)
 
-    raw_df['transactions'] = raw_df['Complaint Year Number'].astype(str) +  ',' + raw_df['Month Number'].astype(str) + ',' + raw_df['Complaint Precinct Code'].astype(str)\
-    + ',' + raw_df['Bias Motive Description'].astype(str)
+    raw_df['transactions'] = raw_df['Complaint Year Number'].astype(str) +  ',' + raw_df['Month Number'].astype(str) + ',' + raw_df['Complaint Precinct Code'].astype(str)
     # print(raw_df['transactions'])
 
     transactions_ls = []
     for b in raw_df['transactions'].unique():
-        items = b
-        items+=','
-        items+=','.join(list(raw_df[raw_df['transactions'] == b]['PD Code Description'].str.strip().unique()))
+        offense_desc = raw_df[raw_df['transactions'] == b]['Offense Description'].str.strip().unique()
+        bias_desc = raw_df[raw_df['transactions'] == b]['Bias Motive Description'].str.strip().unique()
+        combined_desc = list(offense_desc) + list(bias_desc)
+        items = ','.join(combined_desc)
         if len(items) > 0:
             transactions_ls += [items]
 
