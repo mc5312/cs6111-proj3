@@ -39,7 +39,7 @@ def get_initial_itemset():
 
 def apriori_gen(itemsets):
     """
-    Generate C[k], candidate itemsets
+    Generate C[k], candidate itemsets, with prune step
 
     param itemsets: L[k-1], last itemsets
     """
@@ -54,6 +54,7 @@ def apriori_gen(itemsets):
                 if (itemsets[i][k-2] < itemsets[j][k-2]):
                     C[k] += [itemsets[i] + tuple([itemsets[j][k-2]])]
     
+    # === implementation of prune step
     candidate_sets = C[k].copy()
     for c in candidate_sets:
         for s in list(itertools.combinations(set(c), k-1)):
